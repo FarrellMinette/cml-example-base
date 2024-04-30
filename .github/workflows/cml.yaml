@@ -25,3 +25,10 @@ jobs:
           cat metrics.txt >> report.md
           echo "![](./plot.png)" >> report.md
           # cml comment create report.md
+      - name: Create comment using GitHub API
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"body": "Testing github posting"}' \
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.number }}/comments
