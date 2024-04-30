@@ -7,18 +7,21 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
       - uses: iterative/setup-cml@v1
-      - name: Train model
-        env:
-          REPO_TOKEN: ${{ secrets.TOKEN }}
+      - name: Check if TOKEN exists
         run: |
           if [ -z "${{ secrets.TOKEN }}" ]; then
             echo "TOKEN does not exist."
             exit 1
           else
             echo "TOKEN exists."
-            pip install -r requirements.txt
-            python train.py
+          fi
+      - name: Train model
+        env:
+          REPO_TOKEN: ${{ secrets.TOKEN }}
+        run: |
+          pip install -r requirements.txt
+          python train.py
 
-            cat metrics.txt >> report.md
-            echo "![](./plot.png)" >> report.md
-            # cml comment create report.md
+          cat metrics.txt >> report.md
+          echo "![](./plot.png)" >> report.md
+          # cml comment create report.md
