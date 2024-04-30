@@ -16,10 +16,9 @@ jobs:
             exit 1
           else
             echo "TOKEN exists."
-          
-          pip install -r requirements.txt
-          python train.py
+            pip install -r requirements.txt
+            python train.py
 
-          cat metrics.txt >> report.md
-          echo "![](./plot.png)" >> report.md
-          # cml comment create report.md
+            cat metrics.txt >> report.md
+            echo "![](./plot.png)" >> report.md
+            # cml comment create report.md
