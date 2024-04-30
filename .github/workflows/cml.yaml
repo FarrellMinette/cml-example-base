@@ -1,20 +1,40 @@
-name: model-training
-on: [push]
+# name: model-training
+# on: [push]
+# jobs:
+#   run:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: actions/setup-python@v4
+#       - uses: iterative/setup-cml@v1
+#       - name: Train model
+#         env:
+#           REPO_TOKEN: ${{ secrets.TOKEN }}
+#         run: |
+#           echo "Hello world"
+#           pip install -r requirements.txt
+#           python train.py
+
+#           cat metrics.txt >> report.md
+#           echo "![](./plot.png)" >> report.md
+#           cml comment create report.md
+
+name: Check Token
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  run:
+  check-token:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-      - uses: iterative/setup-cml@v1
-      - name: Train model
-        env:
-          REPO_TOKEN: ${{ secrets.TOKEN }}
+      - name: Check if TOKEN exists
         run: |
-          echo "Hello world"
-          pip install -r requirements.txt
-          python train.py
-
-          cat metrics.txt >> report.md
-          echo "![](./plot.png)" >> report.md
-          cml comment create report.md
+          if [ -z "${{ secrets.TOKEN }}" ]; then
+            echo "TOKEN does not exist."
+            exit 1
+          else
+            echo "TOKEN exists."
+          fi
