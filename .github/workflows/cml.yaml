@@ -24,8 +24,6 @@ jobs:
         run: |
           pip install -r requirements.txt
           python train.py
-          touch report.md
-          cat metrics.txt >> report.md
           echo "![](./plot.png)" >> report.md
       - name: Commit and Push Report
         run: |
