@@ -9,6 +9,11 @@ y_train = np.genfromtxt("data/train_labels.csv")
 X_test = np.genfromtxt("data/test_features.csv")
 y_test = np.genfromtxt("data/test_labels.csv")
 
+print(f"X train shape {X_train.shape}")
+print(f"X test shape {X_test.shape}")
+print(f"y train shape {y_train.shape}")
+print(f"y test shape {y_test.shape}")
+
 # Fit a model
 depth = 5
 clf = RandomForestClassifier(max_depth=depth)
