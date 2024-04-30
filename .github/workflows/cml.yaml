@@ -27,4 +27,10 @@ jobs:
 
           cat metrics.txt >> report.md
           echo "![](./plot.png)" >> report.md
-          cml comment update report.md
+      - name: Commit and Push Report
+        run: |
+          git config --global user.email "farrellminette@gmail.com"
+          git config --global user.name "FarrellMinette"
+          git add report.md
+          git commit -m "Add report.md"
+          git push
